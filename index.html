@@ -1,0 +1,110 @@
+<script>
+let things = [
+		['board member', 'board members'],
+		['safety director', 'safety directors'],
+		['instructor', 'instructors'],
+		['most-prolific instructor', 'most prolific instructors'],
+		['appropriate flight regime', 'appropriate flight regimes'],
+		['mindset of the local pilot population', 'mindsets of the local pilot population'],
+		['student pilot outlanding', 'student pilot outlandings'],
+		['comptroller at the state budget level', 'comptrollers at the state budget level'],
+		['modern germaphobic misanthropic political climate', 'modern germaphobic misanthropic political climates'],
+		['authoritarian fuck space', 'authoritarian fuck spaces'],
+		['bully pulpit', 'bully pulpits'],
+		['vested interest', 'vested interests'],
+		['conflict of interest', 'conflicts of interest'],
+		['billionaire real estate and hotel magnate', 'billionaire real estate and hotel magnates'],
+		['obvious double standard', 'obvious double standards']
+	],
+	nameyNouns = [
+		['dictator', 'dictators'],
+		['coward', 'cowards'],
+		['asshole', 'assholes'],
+		['fuckface', 'fuckfaces'],
+		['fucktard', 'fucktards'],
+		['liar', 'liars'],
+		['homo', 'homos'],
+		['stalker', 'stalkers'],
+		['sociopath', 'sociopaths'],
+		['unaccountable coward', 'unaccountable cowards'],
+		['chicken shit', 'chicken shits'],
+		['sole arbiter', 'sole arbiters'],
+		['weenie', 'weenies'],
+		['authoritarian psychopath', 'authoritarian psychopaths']
+	],
+	injusticeVerbPhrases = [
+		'demonized',
+		'lied about'
+	],
+	adjectives = [
+		'silly',
+		'colorful',
+		'creepy',
+		'arrogant',
+		'simple',
+		'stupid',
+		'hypocritical',
+		'disrespectful'
+	],
+	phrasesPositive = [
+		'with years of experience running a club', 
+		'perfect like Jesus',
+		'from a position of knowledge or wisdom gained from 30 fucking years in this business'
+	],
+	phrasesNegative = [
+		'incapable of processing negative critical review',
+		'with zero experience',
+		'denying your own disrespectful bullshit',
+		'until you started acting like a child'
+	],
+	sentenceInsults = [
+		'Fuck you, chicken shit.',
+		'See you around, fuckface.'
+	];
+
+
+let itemWithArticle = function (item) {
+	return ((item[0] == 'a') || (item[0] == 'e')) ? ('an ' + item) : ('a ' + item);
+};
+
+let generateComparison = function () {
+	let quote = 'The big question ',
+		indexAdj = Math.floor(Math.random() * adjectives.length),
+		indexThing = Math.floor(Math.random() * things.length),
+		indexThing2 = Math.floor(Math.random() * things.length),
+		indexInjVerb = Math.floor(Math.random() * injusticeVerbPhrases.length),
+		indexNameyNoun = Math.floor(Math.random() * nameyNouns.length);
+
+	quote += '(' + things[indexThing][1] + '): ' + adjectives[indexAdj] + ' ' + things[indexThing2][1] + ', or ' + injusticeVerbPhrases[indexInjVerb] + ' ' + nameyNouns[indexNameyNoun][1] + '?';
+
+	console.log(quote);
+};
+
+let generateStatement = function () {
+	let quote = 'A ',
+		indexAdj = Math.floor(Math.random() * adjectives.length),
+		indexThing = Math.floor(Math.random() * things.length),
+		indexNameyNoun = Math.floor(Math.random() * nameyNouns.length);
+
+	quote += things[indexThing][0] + ' is nothing but ' + itemWithArticle(adjectives[indexAdj]) + ' ' + nameyNouns[indexNameyNoun][0] + '.';
+
+	console.log(quote);
+};
+
+let generateInsult = function () {
+	let quote = 'You are ',
+		indexAdj = Math.floor(Math.random() * adjectives.length),
+		indexAdj2 = Math.floor(Math.random() * adjectives.length),
+		indexPhrase = Math.floor(Math.random() * phrasesNegative.length),
+		indexNameyNoun = Math.floor(Math.random() * nameyNouns.length),
+		indexSentence = Math.floor(Math.random() * sentenceInsults.length);
+
+	quote += itemWithArticle(adjectives[indexAdj]) + ' ' + adjectives[indexAdj2] + ' ' + nameyNouns[indexNameyNoun][0] + ', ' + phrasesNegative[indexPhrase] + '. ' + sentenceInsults[indexSentence];
+
+	console.log(quote);
+};
+
+generateComparison();
+generateStatement();
+generateInsult();
+</script>

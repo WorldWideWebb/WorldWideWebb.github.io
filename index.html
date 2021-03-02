@@ -82,7 +82,8 @@
 	<div class="selections">
 		<a href="#" title="Generate a deep contemplation" id="question">Deep contemplation</a> |
 		<a href="#" title="Generate an unassailable statement of fact" id="statement">Unassailable statement of fact</a> |
-		<a href="#" title="Generate a mind shattering epithet" id="insult">Mind shattering epithet</a>
+		<a href="#" title="Generate a mind shattering epithet" id="insult">Mind shattering epithet</a> |
+		<a href="#" title="Generate an injustice" id="injustice">Injustice</a>
 	</div>
 
 	<p id="quote"></p>
@@ -185,6 +186,11 @@
 
 		return quote;
 	};
+	document.getElementById('question').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateComparison();
+		return false;
+	}
 
 	let generateStatement = function () {
 		let quote = 'A ',
@@ -196,6 +202,11 @@
 
 		return quote;
 	};
+	document.getElementById('statement').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateStatement();
+		return false;
+	}
 
 	let generateInsult = function () {
 		let quote = 'You are ',
@@ -209,20 +220,27 @@
 
 		return quote;
 	};
-
-	document.getElementById('question').onclick = function(e){
-		e.preventDefault();
-		document.getElementById('quote').innerHTML= generateComparison();
-		return false;
-	}
-	document.getElementById('statement').onclick = function(e){
-		e.preventDefault();
-		document.getElementById('quote').innerHTML= generateStatement();
-		return false;
-	}
 	document.getElementById('insult').onclick = function(e){
 		e.preventDefault();
 		document.getElementById('quote').innerHTML= generateInsult();
+		return false;
+	}
+
+	let generateInjustice = function () {
+		let quote = 'I speak ',
+			indexPhrasePos = randomIndex(phrasesPositive),
+			indexInjusticeVerb = randomIndex(injusticeVerbPhrases),
+			indexAdj = randomIndex(adjectives),
+			indexNameyNoun = randomIndex(nameyNouns),
+			indexPhrase = randomIndex(phrasesNegative);
+
+		quote += phrasesPositive[indexPhrasePos] + ', but have been ' + injusticeVerbPhrases[indexInjusticeVerb] + ' by a bunch of ' + adjectives[indexAdj] + ' ' + nameyNouns[indexNameyNoun][1] + ' ' + phrasesNegative[indexPhrase] + '.';
+
+		return quote;
+	};
+	document.getElementById('injustice').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateInjustice();
 		return false;
 	}
 

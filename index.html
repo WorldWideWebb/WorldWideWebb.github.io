@@ -18,34 +18,61 @@
 			background-size: cover;
 		}
 		body {
-			font-family: 'Crimson Text', serif;
 			padding: 4rem;
+		}
+		h1, h4, p, .selections {
+			text-align: center;
+			max-width: 60rem;
 		}
 		h1 {
 			color: #fff;
 			font-family: 'Montserrat', sans-serif;
-			font-size: 3rem;
-			text-align: center;
-			max-width: 60rem;
+			font-size: 3.5rem;
 			margin: 1rem auto;
+			text-shadow: 0 1px 1px rgba(0,0,0,.8);
+			text-transform: uppercase;
 		}
-		h4 {
-			color: #fff;
+		h4, p, .selections {
 			font-family: 'Crimson Text', serif;
-			font-size: 1.25rem;
-			text-align: center;
-			max-width: 60rem;
 			margin: 2rem auto;
 		}
-		p {
-			color: #fff;
-			font-family: 'Crimson Text', serif;
-			font-size: 2.5rem;
-			text-align: center;
-			line-height: 1.15;
-			max-width: 60rem;
-			margin: 2rem auto;	
-		}
+			h4 {
+				color: #333;
+				font-size: 1.25rem;
+				text-shadow: 0 1px 1px rgba(255,255,255,.75);
+				line-height: 1.4;
+			}
+
+			p {
+				color: #fff;
+				font-size: 2.5rem;
+				font-weight: 600;
+				line-height: 1.15;
+				margin-top: 5rem;
+				text-shadow: 0 1px 1px rgba(0,0,0,.8);
+			}
+
+			.selections, .selections a {
+				color: #fff;
+				font-weight: 600;
+				font-size: 1.25rem;
+				text-shadow: 0 1px 1px rgba(0,0,0,.8);
+				text-decoration: none;
+				padding: 0 1rem;	
+			}
+
+			@media (max-width: 900px) {
+				body {
+					padding: 2rem;
+				}
+				h1 { font-size: 2.5rem; }
+				h4, .selections, .selections a { font-size: 1rem; }
+				p {
+					margin-top: 3rem;
+					font-size: 1.75rem;
+				}
+			}
+
 	</style>
 
 </head>
@@ -54,7 +81,13 @@
 
 	<h1>The Mitchalyzer</h1>
 
-	<h4>Want to posit deep philosophical questions as the intellectual elite do? Need the perfect insult to dish out on social media? Say no more. The Mitchalyzer is an artificially-intelligent generator of thoughts of pure genius.</h4>
+	<h4>Want to posit deep philosophical questions as the intellectual elite do? Need the perfect insult to dish out on social media? Say no more. The Mitchalyzer is an AI of profound technological advancement. It has analyzed and processed the writings of the world's greatest intellectual and can generate new thoughts of its own, for the benefit of all mankind.</h4>
+
+	<div class="selections">
+		<a href="#" title="Generate a deep contemplation" id="question">Deep contemplation</a> |
+		<a href="#" title="Generate an unassailable statement of fact" id="statement">Unassailable statement of fact</a> |
+		<a href="#" title="Generate a mind shattering epithet" id="insult">Mind shattering epithet</a>
+	</div>
 
 	<p id="quote"></p>
 
@@ -76,7 +109,10 @@
 			['vested interest', 'vested interests'],
 			['conflict of interest', 'conflicts of interest'],
 			['billionaire real estate and hotel magnate', 'billionaire real estate and hotel magnates'],
-			['obvious double standard', 'obvious double standards']
+			['obvious double standard', 'obvious double standards'],
+			['safety syllabus for new pilots', 'safety syllabi for new pilots'],
+			['weenie running the forum', 'weenies running the forum'],
+			['misinformed personal anecdote', 'misinformed personal anecdotes']
 		],
 		nameyNouns = [
 			['dictator', 'dictators'],
@@ -106,22 +142,30 @@
 			'simple',
 			'stupid',
 			'hypocritical',
-			'disrespectful'
+			'disrespectful',
+			'low resolution',
+			'imprecise'
 		],
 		phrasesPositive = [
 			'with years of experience running a club', 
 			'perfect like Jesus',
-			'from a position of knowledge or wisdom gained from 30 fucking years in this business'
+			'from a position of knowledge or wisdom gained from 30 fucking years in this business',
+			'actually understanding the bigger picture here'
 		],
 		phrasesNegative = [
 			'incapable of processing negative critical review',
 			'with zero experience',
 			'denying your own disrespectful bullshit',
-			'until you started acting like a child'
+			'until you started acting like a child',
+			'unless I allow you to blather without critical review',
+			'pretending superior knowledge',
+			'offering you a forum to indulge yourself'
 		],
 		sentenceInsults = [
 			'Fuck you, chicken shit.',
-			'See you around, fuckface.'
+			'See you around, fuckface.',
+			'Feeling ronery?',
+			'Trying to find value in life devoid of meaning?'
 		];
 
 	let itemWithArticle = function (item) {
@@ -142,7 +186,6 @@
 
 		quote += '(' + things[indexThing][1] + '): ' + adjectives[indexAdj] + ' ' + things[indexThing2][1] + ', or ' + injusticeVerbPhrases[indexInjVerb] + ' ' + nameyNouns[indexNameyNoun][1] + '?';
 
-		console.log(quote);
 		return quote;
 	};
 
@@ -154,7 +197,6 @@
 
 		quote += things[indexThing][0] + ' is nothing but ' + itemWithArticle(adjectives[indexAdj]) + ' ' + nameyNouns[indexNameyNoun][0] + '.';
 
-		console.log(quote);
 		return quote;
 	};
 
@@ -168,15 +210,25 @@
 
 		quote += itemWithArticle(adjectives[indexAdj]) + ' ' + adjectives[indexAdj2] + ' ' + nameyNouns[indexNameyNoun][0] + ', ' + phrasesNegative[indexPhrase] + '. ' + sentenceInsults[indexSentence];
 
-		console.log(quote);
 		return quote;
 	};
 
-	generateComparison();
-	generateStatement();
-	generateInsult();
+	document.getElementById('question').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateComparison();
+		return false;
+	}
+	document.getElementById('statement').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateStatement();
+		return false;
+	}
+	document.getElementById('insult').onclick = function(e){
+		e.preventDefault();
+		document.getElementById('quote').innerHTML= generateInsult();
+		return false;
+	}
 
-	document.getElementById('quote').innerHTML= generateComparison();
 </script>
 
 </html>
